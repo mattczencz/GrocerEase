@@ -15,13 +15,7 @@ function TabBarIcon(props: {
 
 export default function TabLayout() {
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors.light.tint,
-        // Disable the static render of the header on web
-        // to prevent a hydration error in React Navigation v6.
-        headerShown: false,
-      }}>
+    <Tabs screenOptions={{ tabBarActiveTintColor: Colors.light.tint }}>
       <Tabs.Screen
         name="index"
         options={{
