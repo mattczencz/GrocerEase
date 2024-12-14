@@ -1,15 +1,15 @@
 import Containers from '@/constants/Containers';
 import { StyleSheet, View, Text, ViewStyle } from 'react-native';
 
-const HomeScreen = () => {
+const CategoriesScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>HomeScreen</Text>
+      <Text>Categories</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default CategoriesScreen;
 
 const styles = StyleSheet.create({
   container: { ...(Containers.container as ViewStyle) },

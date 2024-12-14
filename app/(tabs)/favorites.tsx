@@ -1,15 +1,15 @@
 import Containers from '@/constants/Containers';
-import { StyleSheet, View, Text, ViewStyle } from 'react-native';
+import { StyleSheet, Text, View, ViewStyle } from 'react-native';
 
-const HomeScreen = () => {
+const FavoritesScreen = () => {
   return (
     <View style={styles.container}>
-      <Text>HomeScreen</Text>
+      <Text>FavoritesScreen</Text>
     </View>
   );
 };
 
-export default HomeScreen;
+export default FavoritesScreen;
 
 const styles = StyleSheet.create({
   container: { ...(Containers.container as ViewStyle) },

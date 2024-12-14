@@ -1,10 +1,18 @@
 import Colors from '@/constants/Colors';
+import Containers from '@/constants/Containers';
 import FontSizes from '@/constants/FontSizes';
 import { setIsOnboarded } from '@/lib/storageHelpers';
 import { router } from 'expo-router';
 import LottieView from 'lottie-react-native';
+import React from 'react';
 import { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  ViewStyle,
+} from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 type OnboardingMessage = {
@@ -54,9 +62,17 @@ const WelcomeScreen = () => {
       </View>
 
       {index !== messages.length - 1 ? (
-        <TouchableOpacity style={styles.button} onPress={nextMessage}>
-          <Text style={styles.buttonText}>Continue</Text>
-        </TouchableOpacity>
+        <React.Fragment>
+          <TouchableOpacity style={styles.button} onPress={nextMessage}>
+            <Text style={styles.buttonText}>Continue</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{ marginTop: 12 }}
+            onPress={finishOnboarding}
+          >
+            <Text style={styles.skipText}>Skip</Text>
+          </TouchableOpacity>
+        </React.Fragment>
       ) : (
         <TouchableOpacity style={styles.button} onPress={finishOnboarding}>
           <Text style={styles.buttonText}>Get Started!</Text>
@@ -70,9 +86,7 @@ export default WelcomeScreen;
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    ...(Containers.container as ViewStyle),
     backgroundColor: Colors.light.background,
     padding: 24,
     paddingVertical: 0,
@@ -102,5 +116,8 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: FontSizes.body,
     fontWeight: 'semibold',
+  },
+  skipText: {
+    color: '#777',
   },
 });
