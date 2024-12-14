@@ -1,6 +1,8 @@
+import { getIsOnboarded } from '@/lib/storageHelpers';
 import FontAwesome from '@expo/vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
-import { Stack } from 'expo-router';
+import { router, Stack } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { useEffect } from 'react';
 import 'react-native-reanimated';
@@ -18,6 +20,9 @@ export const unstable_settings = {
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
+//! Always deletes local data - delete for persistance
+AsyncStorage.clear();
+
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     SpaceMono: require('../assets/fonts/SpaceMono-Regular.ttf'),
@@ -31,6 +36,9 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded) {
+      getIsOnboarded().then((onboarded) => {
+        if (!onboarded) router.navigate('/(onboarding)/welcome');
+      });
       SplashScreen.hideAsync();
     }
   }, [loaded]);
@@ -39,13 +47,13 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
-}
-
-function RootLayoutNav() {
   return (
     <Stack>
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="(onboarding)"
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
       <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
     </Stack>
   );
