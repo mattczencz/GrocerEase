@@ -40,9 +40,9 @@ export default function RootLayout() {
 
       getIsOnboarded().then((onboarded) => {
         if (onboarded) {
-          router.navigate('/(tabs)');
+          router.navigate('/(tabs)/home');
         } else {
-          router.navigate('/(onboarding)/welcome');
+          router.navigate('/welcome');
         }
       });
     }
@@ -55,7 +55,10 @@ export default function RootLayout() {
   return (
     <Stack>
       <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen
+        name="(tabs)"
+        options={{ headerShown: false, gestureEnabled: false }}
+      />
       <Stack.Screen
         name="(onboarding)"
         options={{ headerShown: false, gestureEnabled: false }}

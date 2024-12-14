@@ -38,7 +38,7 @@ const WelcomeScreen = () => {
 
   const finishOnboarding = () => {
     setIsOnboarded();
-    router.navigate('/(tabs)');
+    router.navigate('/(tabs)/home');
   };
 
   return (
