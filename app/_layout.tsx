@@ -36,10 +36,15 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded) {
-      getIsOnboarded().then((onboarded) => {
-        if (!onboarded) router.navigate('/(onboarding)/welcome');
-      });
       SplashScreen.hideAsync();
+
+      getIsOnboarded().then((onboarded) => {
+        if (onboarded) {
+          router.navigate('/(tabs)');
+        } else {
+          router.navigate('/(onboarding)/welcome');
+        }
+      });
     }
   }, [loaded]);
 
@@ -49,6 +54,7 @@ export default function RootLayout() {
 
   return (
     <Stack>
+      <Stack.Screen name="index" options={{ headerShown: false }} />
       <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
       <Stack.Screen
         name="(onboarding)"
